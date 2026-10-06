@@ -35,5 +35,6 @@
 | 항목 | 결과 |
 |---|---|
 | `./gradlew test` 가 캐시였을 가능성 | `cd modern/api && ./gradlew test --rerun-tasks` → 46 통과 · 0 실패 · 0 skip |
-| 8080 이 HEAD 코드인지 | 사람이 HEAD 로 `bootRun` 재기동 후 `cd characterization && TARGET_BASE_URL=http://localhost:8080 npm test` → 30 통과 · 0 실패 · 1 skip (`tests/example-units.test.js:21`, `TARGET_BASE_URL` 설정 시 `skipIf` 로 건너뛰도록 설계된 레거시 전용 케이스) |
+| 8080 이 HEAD 코드인지 | 2026-10-06 12:49 에 기존 서버를 끄고 HEAD(`b7f79f8`)로 `bootRun` 재기동한 뒤 `cd characterization && TARGET_BASE_URL=http://localhost:8080 npm test` → 30 통과 · 0 실패 · 1 skip (`tests/example-units.test.js:21`, `TARGET_BASE_URL` 설정 시 `skipIf` 로 건너뛰도록 설계된 레거시 전용 케이스) |
+| 기록 정정 | 이 줄의 첫 기록은 "재기동 후 통과"였으나, 그 시점에는 재기동하지 않았다(12:33 에 띄운 서버). 그 뒤 코드 변경이 없어 결과는 같았지만, 위 줄의 재기동 · 재실행으로 기록을 사실에 맞췄다. |
 | diff 기준 브랜치 | 위 결정 (a) 로 해소 |
