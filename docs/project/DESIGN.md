@@ -36,9 +36,14 @@
 ### 5. 단계
 | 단계 | 만들 것 | 확인 방법 | 상태 |
 |---|---|---|---|
-| 1단계 | `.claude/skills/iac-change/SKILL.md` (생성 → `iac-reviewer` → 수정 → 재리뷰 절차, 기록 형식 포함) | `head -5 .claude/skills/iac-change/SKILL.md` 로 frontmatter 확인, `grep -c "iac-reviewer" .claude/skills/iac-change/SKILL.md` 가 1 이상 | 시작 전 |
+| 1단계 | `.claude/skills/iac-change/SKILL.md` (생성 → `iac-reviewer` → 수정 → 재리뷰 절차, 기록 형식 포함) | `head -5 .claude/skills/iac-change/SKILL.md` 로 frontmatter 확인, `grep -c "iac-reviewer" .claude/skills/iac-change/SKILL.md` 가 1 이상 | 완료 (2026-10-13, frontmatter 확인 · iac-reviewer 6회 언급) |
 | 2단계 | 대화형에서 `/iac-change` 1회 실행 → 사이클 기록 1건 | `ls docs/project/iac-cycles/` 에 파일 1개, 그 파일에 "1차 판정: 반려"와 "최종 판정: 승인"이 모두 있음 | 시작 전 |
 | 3단계 | headless 한 줄 실행 | `claude -p "/iac-change ..." --output-format json` 의 `is_error` 가 false, 실행 뒤 `git checkout -- pipeline-samples/terraform/` 후 `git status --short pipeline-samples/terraform/` 이 비어 있음 | 시작 전 |
+
+**다음에 이어서 할 일**
+1. 터미널 1에서 Claude Code 를 다시 띄우고 `/iac-change DB 보안 그룹 3306 을 어디서든 열고 identifier 를 itembank-db-v2 로 바꿔 주세요` 로 2단계 사이클을 1회 돌린다(Skill 파일은 아직 커밋 전, 4-1 검증 뒤 커밋).
+2. `docs/project/iac-cycles/` 기록에 1차 반려 · 최종 승인이 모두 있는지, 반려 줄번호가 실제 diff 와 맞는지 확인한다.
+3. 4장 미해결 질문 중 provider 버전을 먼저 확인해 iac-reviewer 의 "재생성" 판단 근거와 맞춘다.
 
 ### 6. 완성 기준 (Day 4-1에서 점검)
 - [ ] `docs/project/iac-cycles/` 에 사이클 기록 1건이 있고, 요청 → 생성 diff → 1차 판정(반려) → 수정 diff → 최종 판정(승인) 다섯 칸이 모두 채워져 있다
