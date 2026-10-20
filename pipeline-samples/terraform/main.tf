@@ -39,6 +39,29 @@ resource "aws_security_group" "itembank_db" {
   }
 }
 
+# 문항 은행 API 서버의 보안 그룹. API 서브넷 안에서만 8080 을 받고, 나가는 쪽은 DB 3306 만 연다.
+resource "aws_security_group" "itembank_api" {
+  name        = "itembank-dev-api-sg"
+  description = "itembank dev API server (Spring Boot 8080)"
+  vpc_id      = var.vpc_id
+
+  ingress {
+    description = "API traffic from itembank API subnet"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = [var.api_subnet_cidr]
+  }
+
+  egress {
+    description     = "MariaDB to itembank DB security group"
+    from_port       = 3306
+    to_port         = 3306
+    protocol        = "tcp"
+    security_groups = [aws_security_group.itembank_db.id]
+  }
+}
+
 resource "aws_db_subnet_group" "itembank" {
   name       = "itembank-dev-db-subnets"
   subnet_ids = var.db_subnet_ids
