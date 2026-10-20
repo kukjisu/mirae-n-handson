@@ -8,4 +8,4 @@
    증거(판정 요약 한 줄, 치명 건수): `/verify day4-start..HEAD` → 판정: 승인, 치명 0건 (경고 2 · 제안 2). 테스트는 "해당 없음" — Terraform 변경만 있어 실행할 테스트가 없고, terraform 미설치로 fmt · validate 미실행
 
 범위를 줄였는가: 예 — 뺀 항목과 이유는 DESIGN.md "3. 범위 — 하지 않는다"에 있음
-팀 저장소에 가져갈 파일: 없음 (iac-reviewer · Hook 은 3회차 PR #3 으로 올림)
+팀 저장소에 가져갈 파일: .claude/skills/iac-change (IaC 생성 · 리뷰 사이클 Skill, 4-1 에서는 미사용 — 검증 전 초안). iac-reviewer · Hook 은 3회차 PR #3 으로 올림
